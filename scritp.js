@@ -6,10 +6,7 @@ let arr = [];
 for (let ticketKey of ticketKeys) {
     ticketKey.addEventListener('click', () => {
 
-        arr.push(ticketKey.innerText)
-        // console.log(arr);
-        let inner = typeof arr.includes(ticketKey.innerText);
-        // console.log(inner);
+
 
         if (count > 4) {
             alert(`You can only buy 4 tickets`)
@@ -88,8 +85,10 @@ applyCoupon.addEventListener('click', () => {
     }else{
         alert('this coupon code is not valid')
     }
-    inputField.setAttribute('disabled', true);
-    applyCoupon.setAttribute('disabled', true);
+    // inputField.setAttribute('disabled', true);
+    // applyCoupon.setAttribute('disabled', true);
+    let applyArea = document.getElementById('applyArea');
+    applyArea.classList.add('hidden');
     inputField.value = '';
 })
 
@@ -119,6 +118,9 @@ modalOpen.addEventListener('click', () => {
 
     number.value = '';
 
+    let applyArea = document.getElementById('applyArea');
+    applyArea.classList.remove('hidden');
+    applyCoupon.setAttribute('disabled', true);
     document.getElementById('totalSeat').innerText = 40;
     document.getElementById('seat').innerText = 0;
     document.getElementById('totalPrice').innerText = 0;
