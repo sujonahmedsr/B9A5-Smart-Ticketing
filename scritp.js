@@ -6,7 +6,10 @@ let arr = [];
 for (let ticketKey of ticketKeys) {
     ticketKey.addEventListener('click', () => {
 
-
+        arr.push(ticketKey.innerText)
+        // console.log(arr);
+        let inner = typeof arr.includes(ticketKey.innerText);
+        // console.log(inner);
 
         if (count > 4) {
             alert(`You can only buy 4 tickets`)
@@ -32,22 +35,37 @@ for (let ticketKey of ticketKeys) {
             let totalPrice = document.getElementById('totalPrice');
             let totalPriceValue = parseInt(totalPrice.innerText);
             totalPrice.innerText = totalPriceValue + ticketPerPiece;
+
+            if (count > 4) {
+                applyCoupon.removeAttribute('disabled')
+            } else {
+                applyCoupon.setAttribute('disabled', true);
+            }
         }
     })
 }
 
 
+// hide and show apply coupon field 
 let inputField = document.getElementById('inputField');
 let applyCoupon = document.getElementById('apply');
+
+
 inputField.addEventListener('keyup', (e) => {
     let text = e.target.value;
+    if(count > 3){
+        applyCoupon.removeAttribute('disabled')
+    }
     if (text === 'NEW15' || text === 'Couple 20') {
         applyCoupon.removeAttribute('disabled')
     } else {
         applyCoupon.setAttribute('disabled', true);
     }
+    console.log(count);
 })
 
+
+// coupon apply listener 
 applyCoupon.addEventListener('click', () => {
     let totalPrice = document.getElementById('totalPrice');
     let totalPriceValue = parseInt(totalPrice.innerText);
@@ -67,23 +85,29 @@ applyCoupon.addEventListener('click', () => {
         GrandTotal.innerText = totalGrandPrice;
 
         discountArea.classList.remove('hidden');
+    }else{
+        alert('this coupon code is not valid')
     }
+    inputField.setAttribute('disabled', true);
+    applyCoupon.setAttribute('disabled', true);
     inputField.value = '';
 })
 
+// number validation 
 let number = document.getElementById('number');
-number.addEventListener('keyup',()=>{
+number.addEventListener('keyup', () => {
     let numLen = number.value;
-    if(numLen.length === 11 && count > 1){
+    if (numLen.length === 11 && count > 1) {
         modalOpen.removeAttribute('disabled')
-    } else{
+    } else {
         modalOpen.setAttribute('disabled', true)
     }
 })
 
 
+// modal opening and hide all prices and seat number 
 let modalOpen = document.getElementById('modalOpen');
-modalOpen.addEventListener('click', ()=>{
+modalOpen.addEventListener('click', () => {
     let modal = document.getElementById('modal');
     modal.classList.remove('hidden');
     let header = document.getElementById('header');
@@ -93,12 +117,21 @@ modalOpen.addEventListener('click', ()=>{
     let footer = document.getElementById('footer');
     footer.classList.add('hidden');
 
-    count = 0;
     number.value = '';
+
+    document.getElementById('totalSeat').innerText = 40;
+    document.getElementById('seat').innerText = 0;
+    document.getElementById('totalPrice').innerText = 0;
+    document.getElementById('GrandTotal').innerText = 0;
+    document.getElementById('discount').style.display = 'none';
+    document.getElementById('boxContainer').style.display = 'none';
+    modalOpen.setAttribute('disabled', true)
 })
 
+
+// modal closing 
 let modalClose = document.getElementById('modalClose');
-modalClose.addEventListener('click', ()=>{
+modalClose.addEventListener('click', () => {
     let modal = document.getElementById('modal');
     modal.classList.add('hidden');
     let header = document.getElementById('header');
