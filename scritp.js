@@ -10,6 +10,7 @@ for (let ticketKey of ticketKeys) {
 
         if (count > 4) {
             alert(`You can only buy 4 tickets`)
+            removeEventListener();
         } else {
             ticketKey.style.background = '#1DD100';
             ticketKey.style.color = 'white';
@@ -48,18 +49,18 @@ let inputField = document.getElementById('inputField');
 let applyCoupon = document.getElementById('apply');
 
 
-inputField.addEventListener('keyup', (e) => {
-    let text = e.target.value;
-    if(count > 3){
-        applyCoupon.removeAttribute('disabled')
-    }
-    if (text === 'NEW15' || text === 'Couple 20') {
-        applyCoupon.removeAttribute('disabled')
-    } else {
-        applyCoupon.setAttribute('disabled', true);
-    }
-    console.log(count);
-})
+// inputField.addEventListener('keyup', (e) => {
+//     let text = e.target.value;
+//     if(count > 3){
+//         applyCoupon.removeAttribute('disabled')
+//     }
+//     if (text === 'NEW15' || text === 'Couple 20') {
+//         applyCoupon.removeAttribute('disabled')
+//     } else {
+//         applyCoupon.setAttribute('disabled', true);
+//     }
+//     console.log(count);
+// })
 
 
 // coupon apply listener 
@@ -68,6 +69,7 @@ applyCoupon.addEventListener('click', () => {
     let totalPriceValue = parseInt(totalPrice.innerText);
     let GrandTotal = document.getElementById('GrandTotal');
     let discountArea = document.getElementById('discount');
+
     if (inputField.value === 'NEW15') {
         let discount = parseInt(totalPriceValue * 0.15);
         discountArea.innerText = `Total Discount : BDT ${discount}`;
@@ -75,6 +77,9 @@ applyCoupon.addEventListener('click', () => {
         GrandTotal.innerText = totalGrandPrice;
 
         discountArea.classList.remove('hidden');
+        let applyArea = document.getElementById('applyArea');
+        applyArea.classList.add('hidden');
+
     } else if (inputField.value === 'Couple 20') {
         let discount = parseInt(totalPriceValue * 0.20);
         discountArea.innerText = `Total Discount : BDT ${discount}`;
@@ -82,13 +87,15 @@ applyCoupon.addEventListener('click', () => {
         GrandTotal.innerText = totalGrandPrice;
 
         discountArea.classList.remove('hidden');
-    }else{
-        alert('this coupon code is not valid')
+
+        let applyArea = document.getElementById('applyArea');
+        applyArea.classList.add('hidden');
+    } else {
+        alert('this coupon code is not valid. Please Enter valid coupon code.')
     }
     // inputField.setAttribute('disabled', true);
     // applyCoupon.setAttribute('disabled', true);
-    let applyArea = document.getElementById('applyArea');
-    applyArea.classList.add('hidden');
+
     inputField.value = '';
 })
 
