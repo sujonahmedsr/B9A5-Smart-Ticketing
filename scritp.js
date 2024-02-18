@@ -9,9 +9,10 @@ for (let ticketKey of ticketKeys) {
 
 
         if (count > 4) {
-            alert(`You can only buy 4 tickets`)
+            alert(`You can only buy 4 tickets`);
             removeEventListener();
         } else {
+            ticketKey.setAttribute('disabled', true);
             ticketKey.style.background = '#1DD100';
             ticketKey.style.color = 'white';
 
