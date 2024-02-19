@@ -6,8 +6,6 @@ let arr = [];
 for (let ticketKey of ticketKeys) {
     ticketKey.addEventListener('click', () => {
 
-
-
         if (count > 4) {
             alert(`You can only buy 4 tickets`);
             removeEventListener();
@@ -44,25 +42,9 @@ for (let ticketKey of ticketKeys) {
     })
 }
 
-
 // hide and show apply coupon field 
 let inputField = document.getElementById('inputField');
 let applyCoupon = document.getElementById('apply');
-
-
-// inputField.addEventListener('keyup', (e) => {
-//     let text = e.target.value;
-//     if(count > 3){
-//         applyCoupon.removeAttribute('disabled')
-//     }
-//     if (text === 'NEW15' || text === 'Couple 20') {
-//         applyCoupon.removeAttribute('disabled')
-//     } else {
-//         applyCoupon.setAttribute('disabled', true);
-//     }
-//     console.log(count);
-// })
-
 
 // coupon apply listener 
 applyCoupon.addEventListener('click', () => {
@@ -94,9 +76,6 @@ applyCoupon.addEventListener('click', () => {
     } else {
         alert('this coupon code is not valid. Please Enter valid coupon code.')
     }
-    // inputField.setAttribute('disabled', true);
-    // applyCoupon.setAttribute('disabled', true);
-
     inputField.value = '';
 })
 
@@ -111,7 +90,6 @@ number.addEventListener('keyup', () => {
     }
 })
 
-
 // modal opening and hide all prices and seat number 
 let modalOpen = document.getElementById('modalOpen');
 modalOpen.addEventListener('click', () => {
@@ -123,33 +101,12 @@ modalOpen.addEventListener('click', () => {
     main.classList.add('hidden');
     let footer = document.getElementById('footer');
     footer.classList.add('hidden');
-
-    number.value = '';
-
-    let applyArea = document.getElementById('applyArea');
-    applyArea.classList.remove('hidden');
-    applyCoupon.setAttribute('disabled', true);
-    document.getElementById('totalSeat').innerText = 40;
-    document.getElementById('seat').innerText = 0;
-    document.getElementById('totalPrice').innerText = 0;
-    document.getElementById('GrandTotal').innerText = 0;
-    document.getElementById('discount').style.display = 'none';
-    document.getElementById('boxContainer').style.display = 'none';
-    modalOpen.setAttribute('disabled', true)
 })
-
 
 // modal closing 
 let modalClose = document.getElementById('modalClose');
 modalClose.addEventListener('click', () => {
-    let modal = document.getElementById('modal');
-    modal.classList.add('hidden');
-    let header = document.getElementById('header');
-    header.classList.remove('hidden');
-    let main = document.getElementById('main');
-    main.classList.remove('hidden');
-    let footer = document.getElementById('footer');
-    footer.classList.remove('hidden');
+    window.location.reload();
 })
 
 
